@@ -4,16 +4,21 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "typecheck": "tsc --noEmit",
-    "dev": "vite --port=3001",
+    "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "start": "vite"
+    "start": "vite",
+    "tsc": "tsc --noEmit --skipLibCheck",
+    "lint": "biome lint src",
+    "lint:fix": "biome check --apply src",
+    "lint:fix-unsafe": "biome check --write --unsafe src",
+    "format": "biome format src --write"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@tanstack/router-plugin": "^1.91.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@tanstack/router-plugin": "^1.91.1",
     "@vitejs/plugin-react": "^4.3.2",
     "vite": "^6.0.3"
   },
