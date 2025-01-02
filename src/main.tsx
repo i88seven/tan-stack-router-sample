@@ -15,6 +15,7 @@ const queryClient = new QueryClient({
 const router = createRouter({
   routeTree,
   context: {
+    user: undefined, // We'll inject this when we render
     queryClient,
   },
   defaultPreload: 'intent',
