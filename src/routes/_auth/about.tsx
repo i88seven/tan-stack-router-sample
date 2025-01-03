@@ -1,8 +1,8 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
-import { aboutQueryOptions } from '../features/about/api/about'
+import { aboutQueryOptions } from '../../features/about/api/about'
 
-export const Route = createFileRoute('/about')({
+export const Route = createFileRoute('/_auth/about')({
   loader: ({ context: { queryClient } }) =>
     queryClient.ensureQueryData(aboutQueryOptions),
   component: AboutComponent,

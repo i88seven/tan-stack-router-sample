@@ -1,6 +1,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
+import { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
+import { useMe } from './features/authentication/api/user'
 import { routeTree } from './routeTree.gen'
 
 const queryClient = new QueryClient({
@@ -27,13 +29,26 @@ declare module '@tanstack/react-router' {
   }
 }
 
-const rootElement = document.getElementById('app')
+function App() {
+  const user = useMe()
+  useEffect(() => {
+    router.invalidate()
+  }, [user.data])
 
+  return (
+    <RouterProvider
+      router={router}
+      context={{ user: user.data ?? undefined }}
+    />
+  )
+}
+
+const rootElement = document.getElementById('app')
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <App />
     </QueryClientProvider>
   )
 }
