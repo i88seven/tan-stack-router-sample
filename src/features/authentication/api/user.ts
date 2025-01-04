@@ -2,20 +2,22 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import type { z } from 'zod'
 import type { Token, User, loginRequestSchema } from '../types/user'
 
+export const meQuery = {
+  queryKey: ['me'],
+  queryFn: async () => {
+    const accessToken = window.localStorage.getItem('access_token') ?? ''
+    const data = accessToken
+      ? ({
+          email: 'email1',
+          username: import.meta.env.VITE_USER_NAME,
+        } satisfies User)
+      : null
+    return data
+  },
+}
+
 export const useMe = () => {
-  return useQuery({
-    queryKey: ['me'],
-    queryFn: async () => {
-      const accessToken = window.localStorage.getItem('access_token') ?? ''
-      const data = accessToken
-        ? ({
-            email: 'email1',
-            username: import.meta.env.VITE_USER_NAME,
-          } satisfies User)
-        : null
-      return data
-    },
-  })
+  return useQuery(meQuery)
 }
 
 export const usePostToken = () => {
@@ -40,6 +42,7 @@ export const useLogout = () => {
     mutationFn: async () => {
       window.localStorage.removeItem('access_token')
       window.localStorage.removeItem('refresh_token')
+      await queryClient.invalidateQueries({ queryKey: ['me'] })
       queryClient.removeQueries()
       await Promise.resolve() // TODO revoke token
     },

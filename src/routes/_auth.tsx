@@ -1,13 +1,17 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
+import { meQuery } from '../features/authentication/api/user'
 
 export const Route = createFileRoute('/_auth')({
-  beforeLoad: ({ context }) => {
-    if (!context.user) {
+  beforeLoad: async ({ context }) => {
+    const me = await context.queryClient.fetchQuery(meQuery)
+    if (!me) {
       throw redirect({
         to: '/login',
       })
     }
 
-    return context
+    return {
+      user: me,
+    }
   },
 })
