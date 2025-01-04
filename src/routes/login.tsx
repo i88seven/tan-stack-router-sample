@@ -1,6 +1,7 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useLayoutEffect, useState } from 'react'
 import { usePostToken } from '../features/authentication/api/user'
+import { Button, OutlinedInput } from '@mui/material'
 
 export const Route = createFileRoute('/login')({
   component: LoginComponent,
@@ -29,12 +30,12 @@ function LoginComponent() {
         }}
         className='flex gap-2'
       >
-        <input
+        <OutlinedInput
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder='Email'
         />
-        <button type='submit'>ログイン</button>
+        <Button type='submit'>ログイン</Button>
       </form>
     </div>
   )
