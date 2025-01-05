@@ -14,8 +14,8 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as AuthHomeImport } from './routes/_auth/home'
-import { Route as AuthAboutIndexImport } from './routes/_auth/about.index'
-import { Route as AuthAboutAboutIdImport } from './routes/_auth/about.$aboutId'
+import { Route as AuthAboutIndexImport } from './routes/_auth/about/index'
+import { Route as AuthAboutAboutIdImport } from './routes/_auth/about/$aboutId'
 
 // Create/Update Routes
 
@@ -186,11 +186,11 @@ export const routeTree = rootRoute
       "parent": "/_auth"
     },
     "/_auth/about/$aboutId": {
-      "filePath": "_auth/about.$aboutId.tsx",
+      "filePath": "_auth/about/$aboutId.tsx",
       "parent": "/_auth"
     },
     "/_auth/about/": {
-      "filePath": "_auth/about.index.tsx",
+      "filePath": "_auth/about/index.tsx",
       "parent": "/_auth"
     }
   }
