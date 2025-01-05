@@ -1,6 +1,7 @@
 import { Button, OutlinedInput } from '@mui/material'
 import { createFileRoute, useNavigate, useRouter } from '@tanstack/react-router'
 import { useLayoutEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { usePostToken } from '~/features/authentication/api/user'
 
 export const Route = createFileRoute('/login')({
@@ -13,6 +14,7 @@ function LoginComponent() {
   const { mutateAsync: postToken } = usePostToken()
   const [email, setEmail] = useState('')
   const navigate = useNavigate({ from: '/login' })
+  const { t } = useTranslation()
 
   useLayoutEffect(() => {
     if (user) {
@@ -36,7 +38,7 @@ function LoginComponent() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder='Email'
         />
-        <Button type='submit'>ログイン</Button>
+        <Button type='submit'>{t('login')}</Button>
       </form>
     </div>
   )

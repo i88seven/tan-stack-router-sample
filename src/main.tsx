@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import { useMe } from '~/features/authentication/api/user'
 import { routeTree } from '~/routeTree.gen'
+import '~/i18n'
 
 const queryClient = new QueryClient({
   defaultOptions: {
