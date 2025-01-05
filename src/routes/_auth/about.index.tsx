@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { aboutQueryOptions } from '../../features/about/api/about'
+import { aboutQueryOptions } from '~/features/about/api/about'
 
 export const Route = createFileRoute('/_auth/about/')({
   loader: ({ context: { queryClient } }) =>

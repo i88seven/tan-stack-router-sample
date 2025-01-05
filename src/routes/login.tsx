@@ -1,7 +1,7 @@
 import { Button, OutlinedInput } from '@mui/material'
 import { createFileRoute, useNavigate, useRouter } from '@tanstack/react-router'
 import { useLayoutEffect, useState } from 'react'
-import { usePostToken } from '../features/authentication/api/user'
+import { usePostToken } from '~/features/authentication/api/user'
 
 export const Route = createFileRoute('/login')({
   component: LoginComponent,

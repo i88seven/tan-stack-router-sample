@@ -1,5 +1,5 @@
 import { createFileRoute, useParams } from '@tanstack/react-router'
-import { aboutQueryOptions } from '../../features/about/api/about'
+import { aboutQueryOptions } from '~/features/about/api/about'
 
 export const Route = createFileRoute('/_auth/about/$aboutId')({
   loader: ({ context: { queryClient } }) =>

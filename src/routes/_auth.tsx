@@ -1,5 +1,5 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
-import { meQuery } from '../features/authentication/api/user'
+import { meQuery } from '~/features/authentication/api/user'
 
 export const Route = createFileRoute('/_auth')({
   beforeLoad: async ({ context }) => {

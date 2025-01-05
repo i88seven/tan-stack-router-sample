@@ -5,7 +5,7 @@ import {
   createRootRouteWithContext,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
-import type { User } from '../features/authentication/types/user'
+import type { User } from '~/features/authentication/types/user'
 
 export const Route = createRootRouteWithContext<{
   user: User | undefined

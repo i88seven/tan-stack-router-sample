@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "strict": true,
+    "baseUrl": "./src",
+    "paths": {
+      "~/*": ["./*"]
+    },
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "target": "ESNext",

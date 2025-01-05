@@ -2,8 +2,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
-import { useMe } from './features/authentication/api/user'
-import { routeTree } from './routeTree.gen'
+import { useMe } from '~/features/authentication/api/user'
+import { routeTree } from '~/routeTree.gen'
 
 const queryClient = new QueryClient({
   defaultOptions: {
