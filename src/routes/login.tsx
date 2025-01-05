@@ -1,7 +1,7 @@
-import { createFileRoute, useRouter } from '@tanstack/react-router'
+import { Button, OutlinedInput } from '@mui/material'
+import { createFileRoute, useNavigate, useRouter } from '@tanstack/react-router'
 import { useLayoutEffect, useState } from 'react'
 import { usePostToken } from '../features/authentication/api/user'
-import { Button, OutlinedInput } from '@mui/material'
 
 export const Route = createFileRoute('/login')({
   component: LoginComponent,
@@ -12,10 +12,11 @@ function LoginComponent() {
   const { user } = Route.useRouteContext()
   const { mutateAsync: postToken } = usePostToken()
   const [email, setEmail] = useState('')
+  const navigate = useNavigate({ from: '/login' })
 
   useLayoutEffect(() => {
     if (user) {
-      router.history.push('/home')
+      navigate({ to: '/home' })
     }
   }, [user])
 

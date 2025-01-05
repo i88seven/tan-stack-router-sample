@@ -1,6 +1,6 @@
+import { Button } from '@mui/material'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useLogout } from '../../features/authentication/api/user'
-import { Button } from '@mui/material'
 
 export const Route = createFileRoute('/_auth/home')({
   component: HomeComponent,

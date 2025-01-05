@@ -14,7 +14,8 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as AuthHomeImport } from './routes/_auth/home'
-import { Route as AuthAboutImport } from './routes/_auth/about'
+import { Route as AuthAboutIndexImport } from './routes/_auth/about.index'
+import { Route as AuthAboutAboutIdImport } from './routes/_auth/about.$aboutId'
 
 // Create/Update Routes
 
@@ -35,9 +36,15 @@ const AuthHomeRoute = AuthHomeImport.update({
   getParentRoute: () => AuthRoute,
 } as any)
 
-const AuthAboutRoute = AuthAboutImport.update({
-  id: '/about',
-  path: '/about',
+const AuthAboutIndexRoute = AuthAboutIndexImport.update({
+  id: '/about/',
+  path: '/about/',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthAboutAboutIdRoute = AuthAboutAboutIdImport.update({
+  id: '/about/$aboutId',
+  path: '/about/$aboutId',
   getParentRoute: () => AuthRoute,
 } as any)
 
@@ -59,18 +66,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
-    '/_auth/about': {
-      id: '/_auth/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AuthAboutImport
-      parentRoute: typeof AuthImport
-    }
     '/_auth/home': {
       id: '/_auth/home'
       path: '/home'
       fullPath: '/home'
       preLoaderRoute: typeof AuthHomeImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/about/$aboutId': {
+      id: '/_auth/about/$aboutId'
+      path: '/about/$aboutId'
+      fullPath: '/about/$aboutId'
+      preLoaderRoute: typeof AuthAboutAboutIdImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/about/': {
+      id: '/_auth/about/'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AuthAboutIndexImport
       parentRoute: typeof AuthImport
     }
   }
@@ -79,13 +93,15 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AuthRouteChildren {
-  AuthAboutRoute: typeof AuthAboutRoute
   AuthHomeRoute: typeof AuthHomeRoute
+  AuthAboutAboutIdRoute: typeof AuthAboutAboutIdRoute
+  AuthAboutIndexRoute: typeof AuthAboutIndexRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
-  AuthAboutRoute: AuthAboutRoute,
   AuthHomeRoute: AuthHomeRoute,
+  AuthAboutAboutIdRoute: AuthAboutAboutIdRoute,
+  AuthAboutIndexRoute: AuthAboutIndexRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
@@ -93,31 +109,40 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 export interface FileRoutesByFullPath {
   '': typeof AuthRouteWithChildren
   '/login': typeof LoginRoute
-  '/about': typeof AuthAboutRoute
   '/home': typeof AuthHomeRoute
+  '/about/$aboutId': typeof AuthAboutAboutIdRoute
+  '/about': typeof AuthAboutIndexRoute
 }
 
 export interface FileRoutesByTo {
   '': typeof AuthRouteWithChildren
   '/login': typeof LoginRoute
-  '/about': typeof AuthAboutRoute
   '/home': typeof AuthHomeRoute
+  '/about/$aboutId': typeof AuthAboutAboutIdRoute
+  '/about': typeof AuthAboutIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_auth': typeof AuthRouteWithChildren
   '/login': typeof LoginRoute
-  '/_auth/about': typeof AuthAboutRoute
   '/_auth/home': typeof AuthHomeRoute
+  '/_auth/about/$aboutId': typeof AuthAboutAboutIdRoute
+  '/_auth/about/': typeof AuthAboutIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/login' | '/about' | '/home'
+  fullPaths: '' | '/login' | '/home' | '/about/$aboutId' | '/about'
   fileRoutesByTo: FileRoutesByTo
-  to: '' | '/login' | '/about' | '/home'
-  id: '__root__' | '/_auth' | '/login' | '/_auth/about' | '/_auth/home'
+  to: '' | '/login' | '/home' | '/about/$aboutId' | '/about'
+  id:
+    | '__root__'
+    | '/_auth'
+    | '/login'
+    | '/_auth/home'
+    | '/_auth/about/$aboutId'
+    | '/_auth/about/'
   fileRoutesById: FileRoutesById
 }
 
@@ -148,19 +173,24 @@ export const routeTree = rootRoute
     "/_auth": {
       "filePath": "_auth.tsx",
       "children": [
-        "/_auth/about",
-        "/_auth/home"
+        "/_auth/home",
+        "/_auth/about/$aboutId",
+        "/_auth/about/"
       ]
     },
     "/login": {
       "filePath": "login.tsx"
     },
-    "/_auth/about": {
-      "filePath": "_auth/about.tsx",
-      "parent": "/_auth"
-    },
     "/_auth/home": {
       "filePath": "_auth/home.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/about/$aboutId": {
+      "filePath": "_auth/about.$aboutId.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/about/": {
+      "filePath": "_auth/about.index.tsx",
       "parent": "/_auth"
     }
   }
